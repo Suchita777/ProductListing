@@ -1,13 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/main.js"></script>
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Vite App</title>
+    </head>
+    <body>
+        <div id="app"></div>
+        <header>
+            <nav class="navbar">
+                <div class="logo">
+                    <a href="#">
+                        <img src="/icons/Venia.png" alt="logo" />
+                    </a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Women</a></li>
+                    <li><a href="#">Men</a></li>
+                    <li><a href="#">Smart Gear</a></li>
+                    <li><a href="#">Accessories</a></li>
+                </ul>
+                <div class="cart">
+                    <a href="#">
+                        <img src="/icons/cart.svg" alt="Cart Icon" />
+                        <span class="cart-count">10</span>
+                    </a>
+                </div>
+            </nav>
+        </header>
+        <div class="banner">
+            <div class="banner__left">
+                <h2>Men&apos;s Outerwear</h2>
+                <div class="underline"></div>
+            </div>
+            <div class="banner__right">
+                <img src="/public/banner.png" alt="" />
+            </div>
+        </div>
+        <div class="container">
+            <div class="left-section">
+                <div class="breadcrumb"><span>Clothing</span> / <span>Women's</span> / <span>Outerwear</span></div>
+                <aside class="filters">
+                    <h3>Filters</h3>
+                    <div class="categories">
+                      <h4>Categories</h4>
+                      <label><input type="checkbox" /> Jewellery</label>
+                      <label><input type="checkbox" /> Electronics</label>
+                      <label><input type="checkbox" /> Men's Clothing</label>
+                      <label><input type="checkbox" /> Women's Clothing</label>
+                    </div>
+                </aside>
+            </div>
+            <div class="right-section">
+                <div class="result-count">
+                    <span>38 Results</span>
+                    <div class="sort-dropdown">
+                        <label for="sort">Sort by Price</label>
+                        <select id="sort">
+                            <option value="price">Price</option>
+                        </select>
+                    </div>
+                </div>
+                <section class="products" id="product-list"></section>
+            </div>
+        </div>
+        <footer>
+            <div class="footer__links">
+                <div>
+                    <p class="footer-links-heading">Account</p>
+                    <p>Sign In</p>
+                    <p>Register</p>
+                    <p>Order Status</p>
+                </div>
+                <div>
+                    <p class="footer-links-heading">About Us</p>
+                    <p>Our Story</p>
+                    <p>Careers</p>
+                </div>
+                <div>
+                    <p class="footer-links-heading">Help</p>
+                    <p>Contact us</p>
+                    <p>Order Status</p>
+                    <p>Returns</p>
+                </div>
+                <div>
+                    <p class="footer-links-heading">Follow Us!</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+                    <div class="socials">
+                        <img src="/public/icons/instagram.svg" alt="instagram" />
+                        <img src="/public/icons/facebook.svg" alt="facebook" />
+                        <img src="/public/icons/twitter.svg" alt="twitter" />
+                    </div>
+                </div>
+            </div>
+            <div class="footer__copyright">
+                <img src="/public/icons/venia_footer.png" alt="venia-footer" />
+                <p>&copy; Company Name Address Ave, City Name, State ZIP</p>
+                <div class="terms_of_use">
+                    <p>Terms of Use</p>
+                    <p>Privacy Policy</p>
+                </div>
+            </div>
+        </footer>
+        <script type="module" src="/main.js"></script>
+    </body>
 </html>
