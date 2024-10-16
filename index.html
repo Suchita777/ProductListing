@@ -40,30 +40,41 @@
             </div>
         </div>
         <div class="container">
-            <div class="left-section">
+            <div class="left-section controls">
                 <div class="breadcrumb"><span>Clothing</span> / <span>Women's</span> / <span>Outerwear</span></div>
                 <aside class="filters">
-                    <h3>Filters</h3>
+                    <p class="filter_labels">Filters</p>
                     <div class="categories">
-                      <h4>Categories</h4>
-                      <label><input type="checkbox" /> Jewellery</label>
-                      <label><input type="checkbox" /> Electronics</label>
-                      <label><input type="checkbox" /> Men's Clothing</label>
-                      <label><input type="checkbox" /> Women's Clothing</label>
+                      <p class="filter_labels">Categories</p>
+                      <label><input type="checkbox" class="category__option" value="jewelery" /> Jewellery</label>
+                      <label><input type="checkbox" class="category__option" value="electronics" /> Electronics</label>
+                      <label><input type="checkbox" class="category__option" value="men's clothing" /> Men&apos;s Clothing</label>
+                      <label><input type="checkbox" class="category__option" value="women's clothing" /> Women&apos;s Clothing</label>
                     </div>
                 </aside>
+                <div>
+                    <p class="filter_labels">Search</p>
+                    <input type="text" id="search-bar" placeholder="Search products...">
+                </div>
             </div>
-            <div class="right-section">
+            <div class="right-section controls">
                 <div class="result-count">
-                    <span>38 Results</span>
-                    <div class="sort-dropdown">
-                        <label for="sort">Sort by Price</label>
-                        <select id="sort">
-                            <option value="price">Price</option>
-                        </select>
-                    </div>
+                    <span>20 Results</span>
+                    <select id="sort-products">
+                        <option value="default">Sort By Price</option>
+                        <option value="price-low">Low to High</option>
+                        <option value="price-high">High to Low</option>
+                    </select>
+                </div>
+                <div id="shimmer-container" style="display: none;">
+                    <div class="shimmer-card"></div>
+                    <div class="shimmer-card"></div>
+                    <div class="shimmer-card"></div>
                 </div>
                 <section class="products" id="product-list"></section>
+                <button id="load-more">Load More</button>
+                <div id="loading-spinner" style="display: none;">Loading...</div>
+                <p id="error-message" class="error"></p>
             </div>
         </div>
         <footer>
