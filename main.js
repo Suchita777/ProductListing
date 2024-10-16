@@ -1,5 +1,3 @@
-import './style.css';
-
 const productList = document.getElementById("product-list");
 const loadMoreButton = document.getElementById("load-more");
 const searchBar = document.getElementById("search-bar");
