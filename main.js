@@ -12,6 +12,14 @@ let filteredProducts = [];
 let productsToDisplay = 10;
 let currentProducts = 0;
 
+const hamburger = document.querySelector('.hamburger');
+const filters = document.querySelector('.filters');
+
+hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    filters.classList.toggle('active');
+});
+
 // Fetch products from the API
 async function fetchProducts() {
   try {
@@ -67,6 +75,10 @@ function displayProducts() {
   } else {
     loadMoreButton.style.display = "block";
   }
+
+  let resultCount = document.getElementById("products-result-count");
+  resultCount.innerHTML = currentProducts;
+
 }
 
 // Load more products when the button is clicked

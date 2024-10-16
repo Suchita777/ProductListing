@@ -11,6 +11,11 @@
         <div id="app"></div>
         <header>
             <nav class="navbar">
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
                 <div class="logo">
                     <a href="#">
                         <img src="./public/icons/Venia.png" alt="logo" />
@@ -57,10 +62,20 @@
                     <p class="filter_labels">Search</p>
                     <input type="text" id="search-bar" placeholder="Search products...">
                 </div>
+                <div class="mobile_filters">
+                    <div class="mobile__filter">
+                        <img src="./public/icons/sliders.svg" alt="slider" width="20" height="20">
+                        <p>Filter Products</p>
+                    </div>
+                    <div class="mobile__filter">
+                        <img src="./public/icons/sort.png" alt="" width="20" height="20">
+                        <p>Sort products</p>
+                    </div>
+                </div>
             </div>
             <div class="right-section controls">
                 <div class="result-count">
-                    <span>20 Results</span>
+                    <p><span id="products-result-count"></span> Results</p>
                     <select id="sort-products">
                         <option value="default">Sort By Price</option>
                         <option value="price-low">Low to High</option>
