@@ -15,53 +15,51 @@ let filteredProducts = [];
 let productsToDisplay = 10;
 let currentProducts = 0;
 
+const toggleActiveClass = (element) => element.classList.toggle('active');
+
 hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    filters.classList.toggle('active');
+    toggleActiveClass(hamburger);
+    toggleActiveClass(filters);
 });
+
 filter.addEventListener('click', () => {
-  hamburger.classList.toggle('active');
-  filters.classList.toggle('active');
+    toggleActiveClass(hamburger);
+    toggleActiveClass(filters);
 });
 
 // Fetch products from the API
-async function fetchProducts() {
+const fetchProducts = async () => {
   try {
     shimmerContainer.style.display = "grid";
     const response = await fetch("https://fakestoreapi.com/products");
     const products = await response.json();
-    allProducts = products;
-    filteredProducts = products;
+    allProducts = filteredProducts = products;
+    
     setTimeout(() => {
       displayProducts();
       shimmerContainer.style.display = "none";
       productList.style.display = "grid";
     }, 1000);
-    
   } catch (error) {
-    errorMessage.textContent =
-      "Failed to load products. Please try again later.";
+    errorMessage.textContent = "Failed to load products. Please try again later.";
   }
-}
+};
 
 // Display products on the page
-function displayProducts() {
+const displayProducts = () => {
   productList.innerHTML = "";
-  const productsToShow = filteredProducts.slice(
-    0,
-    currentProducts + productsToDisplay
-  );
+  const productsToShow = filteredProducts.slice(0, currentProducts + productsToDisplay);
 
-  productsToShow.forEach((product) => {
+  productsToShow.forEach(({ image, title, price }) => {
     const productCard = document.createElement("div");
     productCard.classList.add("product");
     productCard.innerHTML = `
       <div class="product__image">
-          <img src="${product.image}" alt="${product.title}">
+          <img src="${image}" alt="${title}">
       </div>
       <div class="product__description">
-          <p class="product_title">${product.title}</p>
-          <p class="price">$${product.price}</p>
+          <p class="product_title">${title}</p>
+          <p class="price">$${price}</p>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" id="heart" width="20" height="20" x="0" y="0" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
           </svg>
@@ -73,75 +71,64 @@ function displayProducts() {
   currentProducts = productsToShow.length;
 
   // Hide the load more button if all products are displayed
-  if (currentProducts >= filteredProducts.length) {
-    loadMoreButton.style.display = "none";
-  } else {
-    loadMoreButton.style.display = "block";
-  }
+  loadMoreButton.style.display = currentProducts >= filteredProducts.length ? "none" : "block";
 
-  let resultCount = document.getElementById("products-result-count");
-  resultCount.innerHTML = currentProducts;
-
-}
+  document.getElementById("products-result-count").textContent = currentProducts;
+};
 
 // Load more products when the button is clicked
 loadMoreButton.addEventListener("click", () => {
   shimmerContainer.style.display = "grid";
   productList.style.display = "none";
+  
   setTimeout(() => {
-      displayProducts();
-      shimmerContainer.style.display = "none";
-      productList.style.display = "grid";
-  }, 1000); 
+    displayProducts();
+    shimmerContainer.style.display = "none";
+    productList.style.display = "grid";
+  }, 1000);
 });
 
 // Filter products by category and search term
-function filterAndSearchProducts() {
-  const selectedCategories = Array.from(categoryFilter)
+const filterAndSearchProducts = () => {
+  const selectedCategories = [...categoryFilter]
     .filter(checkbox => checkbox.checked)
     .map(checkbox => checkbox.value);
+
   const searchTerm = searchBar.value.toLowerCase();
 
-  filteredProducts = allProducts.filter((product) => {
-    const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(product.category);
-    const matchesSearch = product.title.toLowerCase().includes(searchTerm);
-    return matchesCategory && matchesSearch;
-  });
+  filteredProducts = allProducts.filter(({ category, title }) => 
+    (!selectedCategories.length || selectedCategories.includes(category)) &&
+    title.toLowerCase().includes(searchTerm)
+  );
 
   currentProducts = 0;
   displayProducts();
-}
+};
 
 // Sort products by price
 sortSelect.addEventListener("change", () => {
   const sortOption = sortSelect.value;
 
-  if (sortOption === "price-low") {
-    filteredProducts.sort((a, b) => a.price - b.price);
-  } else if (sortOption === "price-high") {
-    filteredProducts.sort((a, b) => b.price - a.price);
-  }
+  filteredProducts.sort((a, b) => sortOption === "price-low" ? a.price - b.price : b.price - a.price);
 
   currentProducts = 0;
   displayProducts();
 });
 
+// Sort products in mobile view
 sort.addEventListener('click', () => {
-  sort.classList.toggle('active');
-  if (sort.classList.contains('active')){
-    filteredProducts.sort((a, b) => a.price - b.price);
-  } else {
-    filteredProducts.sort((a, b) => b.price - a.price);
-  }
+  toggleActiveClass(sort);
+  const isActive = sort.classList.contains('active');
+  
+  filteredProducts.sort((a, b) => isActive ? a.price - b.price : b.price - a.price);
+  
   currentProducts = 0;
   displayProducts();
 });
 
 // Search products and filter them by category
 searchBar.addEventListener("input", filterAndSearchProducts);
-categoryFilter.forEach(category => {
-  category.addEventListener('change', filterAndSearchProducts);
-});
+categoryFilter.forEach(category => category.addEventListener('change', filterAndSearchProducts));
 
 // Initial load
 fetchProducts();
