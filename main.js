@@ -3,21 +3,25 @@ const loadMoreButton = document.getElementById("load-more");
 const searchBar = document.getElementById("search-bar");
 const categoryFilter = document.querySelectorAll('.category__option');
 const sortSelect = document.getElementById("sort-products");
-const loadingSpinner = document.getElementById("loading-spinner");
 const shimmerContainer = document.getElementById("shimmer-container");
 const errorMessage = document.getElementById("error-message");
+const hamburger = document.querySelector('.hamburger');
+const filters = document.querySelector('.filters');
+const sort = document.querySelector(".sort");
+const filter = document.querySelector(".filter");
 
 let allProducts = [];
 let filteredProducts = [];
 let productsToDisplay = 10;
 let currentProducts = 0;
 
-const hamburger = document.querySelector('.hamburger');
-const filters = document.querySelector('.filters');
-
 hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
     filters.classList.toggle('active');
+});
+filter.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  filters.classList.toggle('active');
 });
 
 // Fetch products from the API
@@ -58,10 +62,9 @@ function displayProducts() {
       <div class="product__description">
           <p class="product_title">${product.title}</p>
           <p class="price">$${product.price}</p>
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" id="heart" width="20" height="20" x="0" y="0" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-</svg>
-
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" id="heart" width="20" height="20" x="0" y="0" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+          </svg>
       </div>
     `;
     productList.appendChild(productCard);
@@ -119,6 +122,17 @@ sortSelect.addEventListener("change", () => {
     filteredProducts.sort((a, b) => b.price - a.price);
   }
 
+  currentProducts = 0;
+  displayProducts();
+});
+
+sort.addEventListener('click', () => {
+  sort.classList.toggle('active');
+  if (sort.classList.contains('active')){
+    filteredProducts.sort((a, b) => a.price - b.price);
+  } else {
+    filteredProducts.sort((a, b) => b.price - a.price);
+  }
   currentProducts = 0;
   displayProducts();
 });

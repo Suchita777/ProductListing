@@ -122,6 +122,7 @@ header {
 
 .container {
   display: flex;
+  justify-content: center;
   margin: 20px 139px;
 }
 
@@ -430,6 +431,10 @@ footer{
     flex-direction: column-reverse;
     align-items: center;
     text-align: center;
+  }
+
+  .footer__links div{
+    width: 100%;
   }
 
   #error-message {
