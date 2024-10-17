@@ -121,12 +121,34 @@ header {
 
 .container {
   display: flex;
-  justify-content: center;
   margin: 20px 139px;
 }
 
+/* Controls (Search, Filters, Sort) */
+.controls {
+  padding: 20px;
+}
+
+.controls input[type="text"],
+.controls select {
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 250px;
+}
+
+.controls input[type="text"]::placeholder {
+  color: #888;
+}
+
 .left-section {
-  width: 35%;
+  padding-left: 0;
+}
+
+.right-section{
+  width: 100%;
+  padding-right: 0;
 }
 
 .breadcrumb {
@@ -211,7 +233,7 @@ header {
 
 /* Load More Button */
 #load-more {
-  display: block;
+  display: none;
   margin: 20px auto;
   padding: 12px 20px;
   font-size: 1rem;
@@ -226,38 +248,13 @@ header {
   background-color: #555;
 }
 
-#loading-spinner {
-  text-align: center;
-  font-size: 1.5rem;
-  color: #333;
-  padding: 20px;
-}
-
 /* Error Message */
 #error-message {
-  text-align: center;
   color: red;
   font-weight: bold;
-  padding: 20px;
 }
 
-/* Controls (Search, Filters, Sort) */
-.controls {
-  padding: 20px;
-}
 
-.controls input[type="text"],
-.controls select {
-  padding: 10px;
-  font-size: 1rem;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  width: 250px;
-}
-
-.controls input[type="text"]::placeholder {
-  color: #888;
-}
 
 /* Footer */
 
@@ -440,7 +437,7 @@ footer {
   }
 
   #error-message {
-      padding: 0;
+    text-align: center;
   }
 
   .shimmer-card {
