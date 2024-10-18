@@ -50,6 +50,7 @@ const fetchProducts = async () => {
     }, 1000);
   } catch (error) {
     hideShimmerEffect();
+    errorMessage.style.display='block';
     errorMessage.textContent = "Failed to load products. Please try again later.";
   }
 };
@@ -76,8 +77,10 @@ const displayProducts = () => {
         </div>
       `;
       productList.appendChild(productCard);
+      errorMessage.style.display='none';
     });
   } else {
+    errorMessage.style.display='block';
     errorMessage.innerHTML = `
       <p>No products to display.</p>      
     `;
